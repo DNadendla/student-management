@@ -1,0 +1,28 @@
+version: "3"
+services:
+  springapp:
+    image: dattunadendla/mongospring
+    ports:
+    - 8081:8080
+    depends_on:
+    - mongo
+    networks:
+    - jio
+    environment:
+    - MONGO_DB_HOSTNAME=mongo
+    - MONGO_DB_USERNAME=devdb
+    - MONGO_DB_PASSWORD=dev123
+  mongo:
+    image: mongo
+    networks:
+    - jio
+    environment: 
+    - MONGO_INITDB_ROOT_USERNAME=devdb
+    - MONGO_INITDB_ROOT_PASSWORD=dev123
+    volumes:
+    - jiovolume:/data/db
+networks:
+ jio:
+  driver: bridge
+volumes:
+  jiovolume:
